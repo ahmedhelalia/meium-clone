@@ -45,7 +45,7 @@ class PostController extends Controller
         $imagePath = $image->store('posts', 'public');
 
         $data['image'] = $imagePath;
-        
+
         Post::create($data);
 
         return redirect()->route('dashboard');
@@ -54,9 +54,11 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(string $username, Post $post)
     {
-        //
+        return view('post.show', [
+            'post' => $post
+        ]);
     }
 
     /**
