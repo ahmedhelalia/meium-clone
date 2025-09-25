@@ -24,7 +24,8 @@
 
                 </div>
 
-                <x-clap-button />
+                <x-like-button :post="$post" />
+
                 <div class="mt-8">
                     <img src="{{ $post->imageUrl() }}" alt="{{ $post->title }}" class="w-full">
                     <div class="mt-4">
@@ -35,7 +36,7 @@
                 <div class="mt-8 ">
                     <span class="px-4  py-2 bg-gray-300 rounded-2xl"> {{ $post->category->name }}</span>
                 </div>
-                <x-clap-button />
+                <x-like-button :post="$post" />
             </div>
         </div>
 
