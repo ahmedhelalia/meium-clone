@@ -21,7 +21,7 @@
                         <div class="flex gap-2 text-sm text-gray-500">
                             {{ $post->readTime() }} min read
                             &middot;
-                            {{ $post->created_at->format('M d, Y') }}
+                           at {{ $post->published_at->format('M d, Y') }}
                         </div>
                     </div>
 

@@ -25,6 +25,10 @@ class Post extends Model implements HasMedia
         'published_at',
     ];
 
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('preview')->width(400);

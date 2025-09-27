@@ -5,7 +5,7 @@
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="flex">
                     <div class="flex-1 pr-8">
-                        <h1 class="text-5xl"> {{ $user->name }} </h1>
+                        <h1 class="text-5xl"> {{ $user->username }} </h1>
                         <div class="mt-8">
                             @forelse ($posts as $post)
                                 <x-post-item :post="$post"></x-post-item>
@@ -18,7 +18,7 @@
                     </div>
                     <x-follow-ctr :user="$user">
                         <x-user-avatar :user="$user" size="w-24 h-24" />
-                        <h3>{{ $user->name }}</h3>
+                        <h3>{{ $user->username }}</h3>
                         <p class="text-gray-500"> <span x-text="followersCount"></span> followers </p>
                         <p> {{ $user->bio }}</p>
 

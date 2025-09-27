@@ -18,7 +18,7 @@
                 </a>
 
                 at
-                {{ $post->created_at->format('M d, Y') }}
+                {{ $post->published_at->format('M d, Y') }}
             </div>
 
             <span class="items-center inline-flex gap-1">

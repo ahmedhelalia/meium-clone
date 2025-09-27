@@ -19,7 +19,10 @@ class PostController extends Controller
     {
         $user = Auth::user();
 
-        $query = Post::with(['user', 'media'])->withCount('likes')->latest();
+        $query = Post::with(['user', 'media'])
+            ->where('published_at', '<=', now())
+            ->withCount('likes')
+            ->latest();
 
         if ($user) {
             $ids = $user->following()->pluck('users.id');
@@ -50,15 +53,22 @@ class PostController extends Controller
         //$image = $data['image'];
         //unset($data['image']);
         $data['user_id'] = Auth::id();
+        $published_at = $data['published_at'];
+
 
         // $imagePath = $image->store('posts', 'public');
         // $data['image'] = $imagePath;
 
         $post = Post::create($data);
 
+        if (!$data['published_at']) {
+            $post->published_at = $post['created_at'];
+            $post->save();
+        }
+
         $post->addMediaFromRequest('image')->toMediaCollection();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('myPosts');
     }
 
     /**
@@ -119,11 +129,20 @@ class PostController extends Controller
 
     public function category(Category $category)
     {
-        $posts = $category->posts()
+        $user = Auth::user();
+
+        $query = $category->posts()
+            ->where('published_at', '<=', now())
             ->with(['user', 'media'])
             ->withCount('likes')
-            ->latest()
-            ->simplePaginate(5);
+            ->latest();
+
+        if ($user) {
+            $ids = $user->following()->pluck('users.id');
+            $query->whereIn('user_id', $ids);
+        }
+
+        $posts = $query->simplePaginate(5);
 
         return view('post.index', [
             'posts' => $posts,
