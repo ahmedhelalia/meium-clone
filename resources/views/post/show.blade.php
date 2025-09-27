@@ -30,7 +30,7 @@
                 <x-like-button :post="$post" />
 
                 <div class="mt-8">
-                    <img src="{{ $post->imageUrl() }}" alt="{{ $post->title }}" class="w-full">
+                    <img src="{{ $post->imageUrl('') }}" alt="{{ $post->title }}" class="w-full">
                     <div class="mt-4">
                         {{ $post->content }}
                     </div>

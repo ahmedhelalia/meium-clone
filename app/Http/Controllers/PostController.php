@@ -45,16 +45,17 @@ class PostController extends Controller
     public function store(PostCreateRequest $request)
     {
         $data = $request->validated();
-        $image = $data['image'];
+        //$image = $data['image'];
         //unset($data['image']);
         $data['user_id'] = Auth::id();
         $data['slug'] = Str::slug($data['title']);
 
-        $imagePath = $image->store('posts', 'public');
+        // $imagePath = $image->store('posts', 'public');
+        // $data['image'] = $imagePath;
 
-        $data['image'] = $imagePath;
+        $post = Post::create($data);
 
-        Post::create($data);
+        $post->addMediaFromRequest('image')->toMediaCollection();
 
         return redirect()->route('dashboard');
     }

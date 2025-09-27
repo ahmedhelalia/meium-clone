@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
@@ -21,7 +22,7 @@ class ProfileUpdateRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique(User::class)->ignore($this->user()->id)
+                Rule::unique(User::class)->ignore(Auth::user()->id)
             ],
             'image' => ['nullable', 'image'],
             'bio' => ['nullable', 'string'],
@@ -31,7 +32,7 @@ class ProfileUpdateRequest extends FormRequest
                 'lowercase',
                 'email',
                 'max:255',
-                Rule::unique(User::class)->ignore($this->user()->id),
+                Rule::unique(User::class)->ignore(Auth::user()->id),
             ],
         ];
     }
