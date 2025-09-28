@@ -5,11 +5,9 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicProfileController;
+use App\Http\Controllers\ViewUsersController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/@{user:username}', [PublicProfileController::class, 'show'])
     ->name('profile.show');
@@ -24,6 +22,9 @@ Route::get('/@{username}/{post:slug}', [PostController::class, 'show'])
     ->name('post.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/view-users', [ViewUsersController::class, 'index'])
+        ->name('view-users');
 
     Route::get('/post/create', [PostController::class, 'create'])
         ->name('post.create');

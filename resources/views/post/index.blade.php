@@ -13,8 +13,9 @@
                 @forelse ($posts as $post)
                    <x-post-item :post="$post"/>
                 @empty
-                    <div>
-                        <p class="text-center text-gray-400 py-16"> No Posts found.</p>
+                    <div class="flex flex-1 flex-col items-center text-gray-500 py-16">
+                        <p> No Posts found.</p>
+                        <strong class="hover:underline"><a href="/view-users">Follow Users For more</a></strong>
                     </div>
                 @endforelse
 
