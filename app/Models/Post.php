@@ -61,6 +61,11 @@ class Post extends Model implements HasMedia
         return $this->hasMany(Like::class);
     }
 
+    public function saves()
+    {
+        return $this->hasMany(Save::class);
+    }
+
     public function readTime($wordsPerMinute = 100)
     {
         $wordCount = str_word_count(strip_tags($this->content));

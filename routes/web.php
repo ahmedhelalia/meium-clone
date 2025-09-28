@@ -5,6 +5,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicProfileController;
+use App\Http\Controllers\SaveController;
 use App\Http\Controllers\ViewUsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/my-posts', [PostController::class, 'myPosts'])
         ->name('myPosts');
 
+    Route::get('/saved-posts', [PostController::class, 'savedPosts'])
+        ->name('saved-posts');
+
     Route::post('/post', [PostController::class, 'store'])
         ->name('post.store');
 
@@ -47,6 +51,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/follow/{user}', [FollowerController::class, 'followUnfollow'])->name('follow');
 
     Route::post('/like/{post}', [LikeController::class, 'like'])->name('like');
+    Route::post('/save/{post}', [SaveController::class, 'save'])->name('save');
 });
 
 Route::middleware('auth')->group(function () {

@@ -83,7 +83,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function imageUrl()
     {
         $media = $this->getFirstMedia('avatar');
-        
+
         if (!$media)
             return null;
 
@@ -103,5 +103,15 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function hasLiked(Post $post)
     {
         return $post->likes()->where('user_id', $this->id)->exists();
+    }
+
+    public function savedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'saves', 'user_id', 'post_id');
+    }
+
+    public function hasSaved(Post $post)
+    {
+        return $post->saves()->where('user_id', $this->id)->exists();
     }
 }

@@ -161,4 +161,17 @@ class PostController extends Controller
             'posts' => $posts,
         ]);
     }
+    public function savedPosts()
+    {
+        $user = Auth::user();
+        $savedPosts = $user->savedPosts()
+            ->with(['user', 'media'])
+            ->withCount('likes')
+            ->latest()
+            ->paginate();
+            
+        return view('post.index', [
+            'posts' => $savedPosts,
+        ]);
+    }
 }

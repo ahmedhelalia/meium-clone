@@ -47,6 +47,10 @@
                                     {{ __('My Posts') }}
                                 </x-dropdown-link>
 
+                                <x-dropdown-link :href="route('saved-posts')">
+                                    {{ __('Saved Posts') }}
+                                </x-dropdown-link>
+
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -108,6 +112,10 @@
 
                     <x-responsive-nav-link :href="route('myPosts')">
                         {{ __('My Posts') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('saved-posts')">
+                        {{ __('Saved Posts') }}
                     </x-responsive-nav-link>
 
                     <!-- Authentication -->

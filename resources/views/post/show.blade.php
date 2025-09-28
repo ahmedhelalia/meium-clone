@@ -21,14 +21,14 @@
                         <div class="flex gap-2 text-sm text-gray-500">
                             {{ $post->readTime() }} min read
                             &middot;
-                           at {{ $post->published_at->format('M d, Y') }}
+                            at {{ $post->published_at->format('M d, Y') }}
                         </div>
                     </div>
 
                 </div>
 
                 @if ($post->user_id === Auth::id())
-                    <div class="py-4 mt-4 border-t border-gray-200">
+                    <div class="py-4 mt-4 border-t border-b border-gray-200">
                         <x-primary-button href="{{ route('post.edit', $post) }}">
                             Edit Post
                         </x-primary-button>
@@ -41,7 +41,6 @@
                         </form>
                     </div>
                 @endif
-                <x-like-button :post="$post" />
 
                 <div class="mt-8">
                     <img src="{{ $post->imageUrl('') }}" alt="{{ $post->title }}" class="w-full">
@@ -53,7 +52,13 @@
                 <div class="mt-8 ">
                     <span class="px-4  py-2 bg-gray-300 rounded-2xl"> {{ $post->category->name }}</span>
                 </div>
-                <x-like-button :post="$post" />
+                <div class="flex flex-1 flex-row border-t border-b mt-5 ">
+                    <x-like-button :post="$post" />
+
+                    <x-save-button :post="$post" />
+                </div>
+
+
             </div>
         </div>
 
